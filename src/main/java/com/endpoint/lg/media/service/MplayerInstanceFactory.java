@@ -37,7 +37,7 @@ import org.apache.commons.logging.Log;
  * @author Matt Vollrath <matt@endpoint.com>
  */
 public class MplayerInstanceFactory {
-  // XXX: flimsy port selection
+  // TODO: flimsy port selection
   private static final int MIN_PORT = 10042;
   private static final int MAX_PORT = 10142;
   private int currentPort;
