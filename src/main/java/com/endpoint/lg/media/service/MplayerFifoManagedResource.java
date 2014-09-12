@@ -1,3 +1,5 @@
+/* vim: si ts=2 sw=2 et
+*/
 /*
  * Copyright (C) 2013-2014 Google Inc.
  *

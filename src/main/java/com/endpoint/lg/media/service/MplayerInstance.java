@@ -1,3 +1,5 @@
+/* vim: si ts=2 sw=2 et
+*/
 /*
  * Copyright (C) 2013-2014 Google Inc.
  *
@@ -39,8 +41,8 @@ public class MplayerInstance extends ManagedResources implements ManagedResource
   private Log log;
   private NativeActivityRunner runner;
   private MplayerFifoManagedResource fifo;
-  private UdpServerNetworkCommunicationEndpoint udpServer;
-  private UdpClientNetworkCommunicationEndpoint udpClient;
+//  private UdpServerNetworkCommunicationEndpoint udpServer;
+//  private UdpClientNetworkCommunicationEndpoint udpClient;
 
   /**
    * Creates an MplayerInstance with the given components.
@@ -59,8 +61,8 @@ public class MplayerInstance extends ManagedResources implements ManagedResource
    *          udp client endpoint
    */
   public MplayerInstance(String id, Log log, NativeActivityRunner runner,
-      MplayerFifoManagedResource fifo, UdpServerNetworkCommunicationEndpoint udpServer,
-      UdpClientNetworkCommunicationEndpoint udpClient) {
+      MplayerFifoManagedResource fifo) { //, UdpServerNetworkCommunicationEndpoint udpServer,
+//      UdpClientNetworkCommunicationEndpoint udpClient) {
 
     super(log);
 
@@ -68,12 +70,12 @@ public class MplayerInstance extends ManagedResources implements ManagedResource
     this.log = log;
     this.runner = runner;
     this.fifo = fifo;
-    this.udpServer = udpServer;
-    this.udpClient = udpClient;
+ //   this.udpServer = udpServer;
+ //   this.udpClient = udpClient;
 
     addResource(this.fifo);
-    addResource(this.udpServer);
-    addResource(this.udpClient);
+ //   addResource(this.udpServer);
+ //   addResource(this.udpClient);
     addResource(this.runner);
   }
 

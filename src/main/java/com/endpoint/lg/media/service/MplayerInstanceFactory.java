@@ -1,3 +1,5 @@
+/* vim: si ts=2 sw=2 et
+*/
 /*
  * Copyright (C) 2013-2014 Google Inc.
  *
@@ -47,8 +49,8 @@ public class MplayerInstanceFactory {
   private InteractiveSpacesEnvironment environment;
 
   private NativeActivityRunnerFactory runnerFactory;
-  private UdpServerNetworkCommunicationEndpointService udpServerService;
-  private UdpClientNetworkCommunicationEndpointService udpClientService;
+//  private UdpServerNetworkCommunicationEndpointService udpServerService;
+//  private UdpClientNetworkCommunicationEndpointService udpClientService;
 
   /**
    * Creates a factory from the given activity resources.
@@ -68,8 +70,8 @@ public class MplayerInstanceFactory {
     environment = controller.getSpaceEnvironment();
 
     ServiceRegistry registry = environment.getServiceRegistry();
-    udpServerService = registry.getService(UdpServerNetworkCommunicationEndpointService.NAME);
-    udpClientService = registry.getService(UdpClientNetworkCommunicationEndpointService.NAME);
+    //udpServerService = registry.getService(UdpServerNetworkCommunicationEndpointService.NAME);
+    //udpClientService = registry.getService(UdpClientNetworkCommunicationEndpointService.NAME);
 
     currentPort = MIN_PORT;
   }
@@ -83,13 +85,13 @@ public class MplayerInstanceFactory {
   public MplayerInstance newInstance(String id) {
     MplayerFifoManagedResource fifo = createFifo(id);
     NativeActivityRunner runner = createRunner(fifo.getAbsolutePath());
-    UdpServerNetworkCommunicationEndpoint udpServer = createUdpServer(currentPort++);
-    UdpClientNetworkCommunicationEndpoint udpClient = createUdpClient();
+    //UdpServerNetworkCommunicationEndpoint udpServer = createUdpServer(currentPort++);
+    //UdpClientNetworkCommunicationEndpoint udpClient = createUdpClient();
 
     if (currentPort >= MAX_PORT)
       currentPort = MIN_PORT;
 
-    return new MplayerInstance(id, log, runner, fifo, udpServer, udpClient);
+    return new MplayerInstance(id, log, runner, fifo); //, udpServer, udpClient);
   }
 
   /**
@@ -123,22 +125,22 @@ public class MplayerInstanceFactory {
    *          port number to listen on
    * @return UDP server endpoint
    */
-  private UdpServerNetworkCommunicationEndpoint createUdpServer(int port) {
-    UdpServerNetworkCommunicationEndpoint udpServer = udpServerService.newServer(port, log);
-
-    return udpServer;
-  }
+//  private UdpServerNetworkCommunicationEndpoint createUdpServer(int port) {
+//    UdpServerNetworkCommunicationEndpoint udpServer = udpServerService.newServer(port, log);
+//
+//    return udpServer;
+//  }
 
   /**
    * Creates a UDP client for an MplayerInstance.
    * 
    * @return UDP client endpoint
    */
-  private UdpClientNetworkCommunicationEndpoint createUdpClient() {
-    UdpClientNetworkCommunicationEndpoint udpClient = udpClientService.newClient(log);
-
-    return udpClient;
-  }
+//  private UdpClientNetworkCommunicationEndpoint createUdpClient() {
+//    UdpClientNetworkCommunicationEndpoint udpClient = udpClientService.newClient(log);
+//
+//    return udpClient;
+//  }
 
   /**
    * Creates a managed FIFO interface for an MplayerInstance.

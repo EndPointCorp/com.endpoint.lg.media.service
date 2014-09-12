@@ -1,3 +1,5 @@
+/* vim: si ts=2 sw=2 et
+*/
 /*
  * Copyright (C) 2013-2014 Google Inc.
  *
@@ -90,25 +92,27 @@ public class MplayerFifoActivity extends BaseRoutableRosActivity {
 
   @Override
   public void onActivityActivate() {
-    // for testing
-    commandInstance("foo", String.format("loadfile %s 0",
-        getActivityFilesystem().getInstallFile("test.avi").getAbsolutePath()));
-    commandInstance("bar", String.format("loadfile %s 0",
-        getActivityFilesystem().getInstallFile("test.avi").getAbsolutePath()));
-    commandInstance("baz", String.format("loadfile %s 0",
-        getActivityFilesystem().getInstallFile("test.avi").getAbsolutePath()));
-
-    commandInstance("foo", "set_property speed 0.8");
-    commandInstance("bar", "set_property speed 0.9");
-    commandInstance("baz", "set_property brightness -25");
+    getLog().debug("Activating media service");
+//    // for testing
+//    commandInstance("foo", String.format("loadfile %s 0",
+//        getActivityFilesystem().getInstallFile("test.avi").getAbsolutePath()));
+//    commandInstance("bar", String.format("loadfile %s 0",
+//        getActivityFilesystem().getInstallFile("test.avi").getAbsolutePath()));
+//    commandInstance("baz", String.format("loadfile %s 0",
+//        getActivityFilesystem().getInstallFile("test.avi").getAbsolutePath()));
+//
+//    commandInstance("foo", "set_property speed 0.8");
+//    commandInstance("bar", "set_property speed 0.9");
+//    commandInstance("baz", "set_property brightness -25");
   }
 
   @Override
   public void onActivityDeactivate() {
-    // for testing
-    killInstance("foo");
-    killInstance("bar");
-    killInstance("baz");
+    getLog().debug("Deactivating media service");
+//    // for testing
+//    killInstance("foo");
+//    killInstance("bar");
+//    killInstance("baz");
   }
 
   @Override
