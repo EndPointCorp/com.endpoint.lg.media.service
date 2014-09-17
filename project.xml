@@ -25,11 +25,17 @@
       <property name="space.activity.route.input.scene_input" required="false">
         <value>/liquidgalaxy/director/scene</value>
       </property>
-      <property name="space.activity.lg.browser.service.mplayer.path" required="false">
-        <value>/usr/bin/mplayer</value>
+      <property name="space.activity.mplayer.path" required="false">
+        <value>/home/josh/mplayer</value>
       </property>
-      <property name="space.activity.lg.browser.service.mplayer.flags" required="false">
-        <value>/home/josh/l.mp3</value>
+      <property name="space.activity.mplayer.flags" required="false">
+        <value>-really-quiet -msglevel global=5 -nocache -osdlevel 0 -noborder -nolirc -nomouseinput -nograbpointer -noconsolecontrols -idle -slave</value>
+      </property>
+      <property name="space.activity.mplayer.tmpdir" required="false">
+        <value>${activity.tmpdir}</value>
+      </property>
+      <property name="space.activity.mplayer.viewport" required="false">
+        <value>42-a</value>
       </property>
     </configuration>
   </activity>
