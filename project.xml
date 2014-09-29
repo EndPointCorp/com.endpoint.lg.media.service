@@ -23,7 +23,7 @@
         <value>scene_input</value>
       </property>
       <property name="space.activity.route.input.scene_input" required="false">
-        <value>/liquidgalaxy/director/scene</value>
+        <value>/director/scene</value>
       </property>
       <property name="space.activity.mplayer.path" required="false">
         <value>/home/josh/mplayer</value>
