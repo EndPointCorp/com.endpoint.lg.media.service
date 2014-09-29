@@ -53,6 +53,7 @@ public class MediaServiceActivity extends BaseRoutableRosActivity {
     @Override
     public void onActivityShutdown() {
         getLog().info("Activity com.endpoint.lg.media.service shutdown");
+        killAllInstances();
     }
 
     @Override
@@ -62,8 +63,11 @@ public class MediaServiceActivity extends BaseRoutableRosActivity {
 
     public void onNewInputJson(String channelName, Map<String, Object> message) {
         Scene s;
+
+        getLog().debug("Received message: " + message.toString());
         try {
             s = Scene.fromJson(jsonStringify(message));
+            getLog().debug("Received JSON message: " + s.toString());
 
             /* Only kill all previous mplayers *after* we've determined we can
              * parse this new scene */
