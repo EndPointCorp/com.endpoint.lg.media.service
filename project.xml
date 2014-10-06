@@ -26,7 +26,7 @@
         <value>/director/scene</value>
       </property>
       <property name="space.activity.mplayer.path" required="false">
-        <value>/home/josh/mplayer</value>
+        <value>/usr/bin/mplayer</value>
       </property>
       <property name="space.activity.mplayer.flags" required="false">
         <value>-really-quiet -msglevel global=5 -nocache -osdlevel 0 -noborder -nolirc -nomouseinput -nograbpointer -noconsolecontrols -idle -slave</value>

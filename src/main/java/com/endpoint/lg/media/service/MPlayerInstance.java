@@ -7,6 +7,7 @@ import interactivespaces.configuration.Configuration;
 import interactivespaces.controller.SpaceController;
 import interactivespaces.util.resource.ManagedResource;
 import java.util.Map;
+import java.util.UUID;
 import org.apache.commons.logging.Log;
 
 /**
@@ -34,8 +35,8 @@ public class MPlayerInstance implements ManagedResource {
         runner = _controller.getNativeActivityRunnerFactory().newPlatformNativeActivityRunner(getLog());
 
         fifo = new MPlayerFifoManagedResource(
-            // XXX Get a better ID
-            "mplayerID", _config, _controller.getSpaceEnvironment().getExecutorService(), _log
+            UUID.randomUUID().toString().replace("-", ""), _config,
+            _controller.getSpaceEnvironment().getExecutorService(), _log
         );
 
         Map<String, Object> runnerConfig = Maps.newHashMap();
@@ -84,6 +85,7 @@ public class MPlayerInstance implements ManagedResource {
     }
 
     public void shutdown() {
+        fifo.writeToFifo("quit");
         runner.shutdown();
         fifo.shutdown();
     }
