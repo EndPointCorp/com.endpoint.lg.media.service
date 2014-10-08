@@ -17,7 +17,7 @@
         <value>debug</value>
       </property>
       <property name="space.activity.ros.node.name" required="false">
-        <value>browser_service</value>
+        <value>media_service</value>
       </property>
       <property name="space.activity.routes.inputs" required="false">
         <value>scene_input</value>
