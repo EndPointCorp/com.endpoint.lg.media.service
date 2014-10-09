@@ -41,16 +41,16 @@ public class MPlayerInstance implements ManagedResource {
 
         Map<String, Object> runnerConfig = Maps.newHashMap();
         runnerConfig.put(
-            NativeActivityRunner.ACTIVITYNAME,
+            NativeActivityRunner.EXECUTABLE_PATHNAME,
             _config.getRequiredPropertyString("space.activity.mplayer.path")
         );
         runnerConfig.put(
-            NativeActivityRunner.FLAGS,
+            NativeActivityRunner.EXECUTABLE_FLAGS,
             _config.getRequiredPropertyString("space.activity.mplayer.flags") +
                 " -input file=\"" + fifo.getAbsolutePath() + "\"" +
                 getGeometryFlags(window)
         );
-        getLog().debug("Mplayer flags: " + runnerConfig.get(NativeActivityRunner.FLAGS));
+        getLog().debug("Mplayer flags: " + runnerConfig.get(NativeActivityRunner.EXECUTABLE_FLAGS));
         runner.configure(runnerConfig);
     }
 
