@@ -31,9 +31,6 @@
       <property name="space.activity.mplayer.flags" required="false">
         <value>-really-quiet -msglevel global=5 -nocache -osdlevel 0 -noborder -nolirc -nomouseinput -nograbpointer -noconsolecontrols -idle -slave</value>
       </property>
-      <property name="space.activity.mplayer.tmpdir" required="false">
-        <value>${activity.tmpdir}</value>
-      </property>
       <property name="space.activity.mplayer.viewport" required="false">
         <value>42-a</value>
       </property>

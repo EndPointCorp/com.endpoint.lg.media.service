@@ -27,7 +27,7 @@ public class MPlayerInstance implements ManagedResource {
         return log;
     }
 
-    public MPlayerInstance(SpaceController _controller, Configuration _config, Log _log, Window _window)
+    public MPlayerInstance(SpaceController _controller, Configuration _config, Log _log, Window _window, String tmpdir)
     {
         log = _log;
         window = _window;
@@ -36,7 +36,7 @@ public class MPlayerInstance implements ManagedResource {
 
         fifo = new MPlayerFifoManagedResource(
             UUID.randomUUID().toString().replace("-", ""), _config,
-            _controller.getSpaceEnvironment().getExecutorService(), _log
+            _controller.getSpaceEnvironment().getExecutorService(), _log, tmpdir
         );
 
         Map<String, Object> runnerConfig = Maps.newHashMap();
@@ -47,7 +47,7 @@ public class MPlayerInstance implements ManagedResource {
         runnerConfig.put(
             NativeActivityRunner.EXECUTABLE_FLAGS,
             _config.getRequiredPropertyString("space.activity.mplayer.flags") +
-                " -input file=\"" + fifo.getAbsolutePath() + "\"" +
+                " -idle -input file=\"" + fifo.getAbsolutePath() + "\"" +
                 getGeometryFlags(window)
         );
         getLog().debug("Mplayer flags: " + runnerConfig.get(NativeActivityRunner.EXECUTABLE_FLAGS));
