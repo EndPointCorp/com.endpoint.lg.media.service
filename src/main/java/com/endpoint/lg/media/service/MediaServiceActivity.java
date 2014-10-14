@@ -76,7 +76,7 @@ public class MediaServiceActivity extends BaseRoutableRosActivity {
             for (Window w : s.windows) {
                 if ((w.activity.equals("video") || w.activity.equals("audio")) &&
                         w.presentation_viewport.equals(
-                            getConfiguration().getRequiredPropertyString("space.activity.mplayer.viewport")
+                            getConfiguration().getRequiredPropertyString("lg.window.viewport.target")
                         )) {
                     handleMediaCommand(w);
                 }

@@ -2,7 +2,7 @@ CONFIGURATION VARIABLES FOR LG-CMS ACTIVITIES
 
 media.service
         # Expects a defined input route to receive director messages
-    space.activity.mplayer.viewport         Viewport name, to filter incoming messages
+    lg.window.viewport.target               Viewport name, to filter incoming messages
     space.activity.mplayer.tmpdir           Temp directory for mplayer fifo
     space.activity.mplayer.path             Where to find mplayer
     space.activity.mplayer.flags            Extra mplayer flags
