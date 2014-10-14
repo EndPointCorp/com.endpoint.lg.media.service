@@ -57,9 +57,9 @@ public class MPlayerInstance implements ManagedResource {
         runnerConfig.put(
             NativeActivityRunner.EXECUTABLE_FLAGS,
             _config.getRequiredPropertyString("space.activity.mplayer.flags") +
-                " -name " + windowInstanceString + " -idle -input file=\"" + fifo.getAbsolutePath() + "\""); //" +
-//                getGeometryFlags(window)
-//        );
+                " -name " + windowInstanceString + " -idle -input file=\"" + fifo.getAbsolutePath() + "\"" +
+                getGeometryFlags(window)
+        );
         getLog().debug("Mplayer flags: " + runnerConfig.get(NativeActivityRunner.EXECUTABLE_FLAGS));
 
         windowId = new WindowInstanceIdentity(windowInstanceString);
@@ -74,7 +74,7 @@ public class MPlayerInstance implements ManagedResource {
     }
 
     private String getGeometryFlags(Window w) {
-        return " -geometry " + w.width + "x" + w.height + "+" + w.x_coord + "+" + w.y_coord;
+        return " -geometry " + w.width + "x" + w.height; // + "+" + w.x_coord + "+" + w.y_coord;
     }
     
     public void sendCommand(String command) {
