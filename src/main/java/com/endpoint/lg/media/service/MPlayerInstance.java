@@ -57,13 +57,14 @@ public class MPlayerInstance implements ManagedResource {
         runnerConfig.put(
             NativeActivityRunner.EXECUTABLE_FLAGS,
             _config.getRequiredPropertyString("space.activity.mplayer.flags") +
-                " -name \"" + windowInstanceString + "\" -idle -input file=\"" + fifo.getAbsolutePath() + "\"" +
-                getGeometryFlags(window)
-        );
+                " -name " + windowInstanceString + " -idle -input file=\"" + fifo.getAbsolutePath() + "\""); //" +
+//                getGeometryFlags(window)
+//        );
         getLog().debug("Mplayer flags: " + runnerConfig.get(NativeActivityRunner.EXECUTABLE_FLAGS));
 
         windowId = new WindowInstanceIdentity(windowInstanceString);
         managedWindow = new ManagedWindow(act, windowId, getWindowGeometry(window));
+        managedWindow.resize(window.width, window.height);
 
         runner.configure(runnerConfig);
     }
@@ -100,11 +101,14 @@ public class MPlayerInstance implements ManagedResource {
     public void startup() {
         fifo.startup();
         runner.startup();
+        managedWindow.setVisible(true);
+        managedWindow.update();
     }
 
     public void shutdown() {
         fifo.writeToFifo("quit");
         runner.shutdown();
         fifo.shutdown();
+        managedWindow.shutdown();
     }
 }
