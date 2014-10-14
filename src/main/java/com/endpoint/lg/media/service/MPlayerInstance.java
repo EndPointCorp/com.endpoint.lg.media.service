@@ -1,8 +1,13 @@
 package com.endpoint.lg.media.service;
 
 import com.endpoint.lg.support.message.Window;
+import com.endpoint.lg.support.window.ManagedWindow;
+import com.endpoint.lg.support.window.WindowGeometry;
+import com.endpoint.lg.support.window.WindowIdentity;
+import com.endpoint.lg.support.window.WindowInstanceIdentity;
 import com.google.common.collect.Maps;
 import interactivespaces.activity.binary.NativeActivityRunner;
+import interactivespaces.activity.impl.BaseActivity;
 import interactivespaces.configuration.Configuration;
 import interactivespaces.controller.SpaceController;
 import interactivespaces.util.resource.ManagedResource;
@@ -22,12 +27,15 @@ public class MPlayerInstance implements ManagedResource {
     private Window window;
     private NativeActivityRunner runner;
     private MPlayerFifoManagedResource fifo;
+    private String windowInstanceString;
+    private WindowInstanceIdentity windowId;
+    private ManagedWindow managedWindow;
 
     private Log getLog() {
         return log;
     }
 
-    public MPlayerInstance(SpaceController _controller, Configuration _config, Log _log, Window _window, String tmpdir)
+    public MPlayerInstance(BaseActivity act, SpaceController _controller, Configuration _config, Log _log, Window _window, String tmpdir)
     {
         log = _log;
         window = _window;
@@ -39,6 +47,8 @@ public class MPlayerInstance implements ManagedResource {
             _controller.getSpaceEnvironment().getExecutorService(), _log, tmpdir
         );
 
+        windowInstanceString = UUID.randomUUID().toString().replace("-", "");
+
         Map<String, Object> runnerConfig = Maps.newHashMap();
         runnerConfig.put(
             NativeActivityRunner.EXECUTABLE_PATHNAME,
@@ -47,11 +57,19 @@ public class MPlayerInstance implements ManagedResource {
         runnerConfig.put(
             NativeActivityRunner.EXECUTABLE_FLAGS,
             _config.getRequiredPropertyString("space.activity.mplayer.flags") +
-                " -idle -input file=\"" + fifo.getAbsolutePath() + "\"" +
+                " -name \"" + windowInstanceString + "\" -idle -input file=\"" + fifo.getAbsolutePath() + "\"" +
                 getGeometryFlags(window)
         );
         getLog().debug("Mplayer flags: " + runnerConfig.get(NativeActivityRunner.EXECUTABLE_FLAGS));
+
+        windowId = new WindowInstanceIdentity(windowInstanceString);
+        managedWindow = new ManagedWindow(act, windowId, getWindowGeometry(window));
+
         runner.configure(runnerConfig);
+    }
+
+    private WindowGeometry getWindowGeometry(Window w) {
+        return new WindowGeometry(w.width, w.height, w.x_coord, w.y_coord);
     }
 
     private String getGeometryFlags(Window w) {

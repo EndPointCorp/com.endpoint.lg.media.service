@@ -94,7 +94,7 @@ public class MediaServiceActivity extends BaseRoutableRosActivity {
      */
     private void handleMediaCommand(Window window) {
         /* Create new mplayer instance, and run it */
-        MPlayerInstance m = new MPlayerInstance(getController(), getConfiguration(), getLog(), window, getActivityFilesystem().getTempDataDirectory().getAbsolutePath());
+        MPlayerInstance m = new MPlayerInstance(this, getController(), getConfiguration(), getLog(), window, getActivityFilesystem().getTempDataDirectory().getAbsolutePath());
         instances.add(m);
         m.startup();
 
