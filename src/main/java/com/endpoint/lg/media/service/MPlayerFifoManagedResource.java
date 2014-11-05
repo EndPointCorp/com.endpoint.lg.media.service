@@ -46,11 +46,6 @@ import java.util.ArrayDeque;
 public class MPlayerFifoManagedResource implements ManagedResource {
 
   /**
-   * Config key for FIFO base directory.
-   */
-  public static final String CONFIGURATION_NAME_MPLAYER_TMPDIR = "space.activity.mplayer.tmpdir";
-
-  /**
    * Path for mplayer FIFO.
    */
   private File mplayerFifo;
@@ -93,14 +88,9 @@ public class MPlayerFifoManagedResource implements ManagedResource {
     this.log = log;
 
     printBuffer = new ArrayDeque<String>();
-//    if (config.getPropertyString(CONFIGURATION_NAME_MPLAYER_TMPDIR).equals(null)) {
-//      log.error("Can't get property string " + CONFIGURATION_NAME_MPLAYER_TMPDIR);
-//    }
     mplayerFifo =
         new File(String.format("%s/%s.fifo",
             tmpdir, id));
-            // getActivityFilesystem().getTempDataDirectory().getAbsolutePath(),
-            // config.getPropertyString(CONFIGURATION_NAME_MPLAYER_TMPDIR), id));
   }
 
   /**
