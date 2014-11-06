@@ -1,5 +1,6 @@
 package com.endpoint.lg.media.service;
 
+import com.endpoint.lg.support.interactivespaces.ConfigurationHelper;
 import com.endpoint.lg.support.message.Window;
 import com.endpoint.lg.support.window.ManagedWindow;
 import com.endpoint.lg.support.window.WindowGeometry;
@@ -56,7 +57,7 @@ public class MPlayerInstance implements ManagedResource {
         );
         runnerConfig.put(
             NativeActivityRunner.EXECUTABLE_FLAGS,
-            _config.getRequiredPropertyString("space.activity.mplayer.flags") +
+                ConfigurationHelper.getConfigurationConcat(_config, "space.activity.mplayer.flags", " ") +
                 " -name " + windowInstanceString + " -idle -input file=\"" + fifo.getAbsolutePath() + "\"" +
                 getGeometryFlags(window)
         );
@@ -67,6 +68,7 @@ public class MPlayerInstance implements ManagedResource {
         managedWindow.resize(window.width, window.height);
 
         runner.configure(runnerConfig);
+        act.addManagedResource(runner);
     }
 
     private WindowGeometry getWindowGeometry(Window w) {
