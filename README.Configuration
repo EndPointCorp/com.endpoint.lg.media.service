@@ -5,3 +5,9 @@ media.service
     lg.window.viewport.target               Viewport name, to filter incoming messages
     space.activity.mplayer.path             Where to find mplayer
     space.activity.mplayer.flags            Extra mplayer flags
+
+Working config
+lg.window.viewport.target=42-a
+space.activity.mplayer.flags=-really-quiet -msglevel global=5 -nograbpointer -noconsolecontrols -nomouseinput -osdlevel 0 -ontop -cache 8192
+space.activity.mplayer.path=/usr/bin/mplayer
+
