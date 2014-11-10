@@ -8,6 +8,8 @@ import com.endpoint.lg.support.window.WindowIdentity;
 import com.endpoint.lg.support.window.WindowInstanceIdentity;
 import com.google.common.collect.Maps;
 import interactivespaces.activity.binary.NativeActivityRunner;
+import interactivespaces.util.process.NativeApplicationRunner;
+import interactivespaces.util.process.NativeApplicationRunnerCollection;
 import interactivespaces.activity.impl.BaseActivity;
 import interactivespaces.configuration.Configuration;
 import interactivespaces.controller.SpaceController;
@@ -26,7 +28,8 @@ import org.apache.commons.logging.Log;
 public class MPlayerInstance implements ManagedResource {
     private Log log;
     private Window window;
-    private NativeActivityRunner runner;
+    private NativeApplicationRunner runner;
+    private NativeApplicationRunnerCollection runnerCollection;
     private MPlayerFifoManagedResource fifo;
     private String windowInstanceString;
     private WindowInstanceIdentity windowId;
@@ -40,8 +43,6 @@ public class MPlayerInstance implements ManagedResource {
     {
         log = _log;
         window = _window;
-
-        runner = _controller.getNativeActivityRunnerFactory().newPlatformNativeActivityRunner(getLog());
 
         fifo = new MPlayerFifoManagedResource(
             UUID.randomUUID().toString().replace("-", ""), _config,
@@ -67,8 +68,11 @@ public class MPlayerInstance implements ManagedResource {
         managedWindow = new ManagedWindow(act, windowId, getWindowGeometry(window));
         managedWindow.resize(window.width, window.height);
 
+        runnerCollection = new NativeApplicationRunnerCollection(act.getSpaceEnvironment(), _log);
+        act.addManagedResource(runnerCollection);
+        runner = runnerCollection.newNativeApplicationRunner();
         runner.configure(runnerConfig);
-        act.addManagedResource(runner);
+        runnerCollection.addNativeApplicationRunner(runner);
     }
 
     private WindowGeometry getWindowGeometry(Window w) {
