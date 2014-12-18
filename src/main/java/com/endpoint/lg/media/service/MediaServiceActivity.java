@@ -7,6 +7,7 @@ import com.google.common.collect.Maps;
 import interactivespaces.activity.impl.ros.BaseRoutableRosActivity;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -75,9 +76,10 @@ public class MediaServiceActivity extends BaseRoutableRosActivity {
 
             for (Window w : s.windows) {
                 if ((w.activity.equals("video") || w.activity.equals("audio")) &&
-                        w.presentation_viewport.equals(
-                            getConfiguration().getRequiredPropertyString("lg.window.viewport.target")
-                        )) {
+                        Arrays.asList(
+                            getConfiguration().getRequiredPropertyString("lg.window.viewport.target").split(",")
+                        ).indexOf(w.presentation_viewport) != -1
+                        ) {
                     handleMediaCommand(w);
                 }
             }
