@@ -66,6 +66,7 @@ public class MPlayerInstance implements ManagedResource {
 
         windowId = new WindowInstanceIdentity(windowInstanceString);
         managedWindow = new ManagedWindow(act, windowId, getWindowGeometry(window));
+        managedWindow.setViewportName(_window.presentation_viewport);
         managedWindow.resize(window.width, window.height);
 
         runnerCollection = new NativeApplicationRunnerCollection(act.getSpaceEnvironment(), _log);
