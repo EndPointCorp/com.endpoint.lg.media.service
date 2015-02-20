@@ -109,6 +109,7 @@ public class MPlayerInstance implements ManagedResource {
         fifo.startup();
         runner.startup();
         managedWindow.setVisible(true);
+        managedWindow.raise();
         managedWindow.update();
     }
 
