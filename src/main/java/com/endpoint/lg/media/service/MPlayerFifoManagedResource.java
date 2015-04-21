@@ -1,6 +1,7 @@
 /* vim: si ts=2 sw=2 et
 */
 /*
+ * Copyright (C) 2015 End Point Corporation
  * Copyright (C) 2013-2014 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
