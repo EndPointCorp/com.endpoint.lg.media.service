@@ -9,6 +9,7 @@ Liquid Galaxy Interactive Spaces service to control MPlayer instances in respons
 Configuration variables for LG-CMS activities
 ---------------------------------------------
 
+```
 media.service
     # Expects a defined input route to receive director messages
     lg.window.viewport.target               Viewport name, to filter incoming messages
@@ -19,6 +20,7 @@ Working config:
 lg.window.viewport.target=42-a
 space.activity.mplayer.flags=-really-quiet -msglevel global=5 -nograbpointer -noconsolecontrols -nomouseinput -osdlevel 0 -ontop -cache 8192
 space.activity.mplayer.path=/usr/bin/mplayer
+```
 
 
 Copyright (C) 2015 Google Inc.  
