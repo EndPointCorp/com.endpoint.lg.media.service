@@ -21,7 +21,7 @@ space.activity.mplayer.flags=-really-quiet -msglevel global=5 -nograbpointer -no
 space.activity.mplayer.path=/usr/bin/mplayer
 
 
-Copyright (C) 2015 Google Inc.
+Copyright (C) 2015 Google Inc.  
 Copyright (C) 2015 End Point Corporation
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not
