@@ -32,6 +32,7 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.concurrent.ExecutorService;
@@ -133,7 +134,11 @@ public class MPlayerFifoManagedResource implements ManagedResource {
 
   @Override
   public void shutdown() {
-    Closeables.closeQuietly(printStream);
+    try {
+      Closeables.close(printStream, true);
+    } catch (IOException e) {
+      log.warn(e);
+    }
     mplayerFifo.delete();
   }
 

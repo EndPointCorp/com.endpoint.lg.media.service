@@ -9,10 +9,10 @@ import com.endpoint.lg.support.window.WindowInstanceIdentity;
 import com.google.common.collect.Maps;
 import interactivespaces.activity.binary.NativeActivityRunner;
 import interactivespaces.util.process.NativeApplicationRunner;
-import interactivespaces.util.process.NativeApplicationRunnerCollection;
+import interactivespaces.util.process.StandardNativeApplicationRunnerCollection;
 import interactivespaces.activity.impl.BaseActivity;
 import interactivespaces.configuration.Configuration;
-import interactivespaces.controller.SpaceController;
+import interactivespaces.activity.ActivityRuntime;
 import interactivespaces.util.resource.ManagedResource;
 import java.util.Map;
 import java.util.UUID;
@@ -29,7 +29,7 @@ public class MPlayerInstance implements ManagedResource {
     private Log log;
     private Window window;
     private NativeApplicationRunner runner;
-    private NativeApplicationRunnerCollection runnerCollection;
+    private StandardNativeApplicationRunnerCollection runnerCollection;
     private MPlayerFifoManagedResource fifo;
     private String windowInstanceString;
     private WindowInstanceIdentity windowId;
@@ -39,14 +39,14 @@ public class MPlayerInstance implements ManagedResource {
         return log;
     }
 
-    public MPlayerInstance(BaseActivity act, SpaceController _controller, Configuration _config, Log _log, Window _window, String tmpdir)
+    public MPlayerInstance(BaseActivity act, ActivityRuntime _activityRuntime, Configuration _config, Log _log, Window _window, String tmpdir)
     {
         log = _log;
         window = _window;
 
         fifo = new MPlayerFifoManagedResource(
             UUID.randomUUID().toString().replace("-", ""), _config,
-            _controller.getSpaceEnvironment().getExecutorService(), _log, tmpdir
+            _activityRuntime.getSpaceEnvironment().getExecutorService(), _log, tmpdir
         );
 
         windowInstanceString = UUID.randomUUID().toString().replace("-", "");
@@ -69,7 +69,7 @@ public class MPlayerInstance implements ManagedResource {
         managedWindow.setViewportName(_window.presentation_viewport);
         managedWindow.resize(window.width, window.height);
 
-        runnerCollection = new NativeApplicationRunnerCollection(act.getSpaceEnvironment(), _log);
+        runnerCollection = new StandardNativeApplicationRunnerCollection(act.getSpaceEnvironment(), _log);
         act.addManagedResource(runnerCollection);
         runner = runnerCollection.newNativeApplicationRunner();
         runner.configure(runnerConfig);
